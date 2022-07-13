@@ -29,18 +29,18 @@ public class PratosController {
     }
 
     @GetMapping("/calories/{prato}")
-    public ResponseEntity<Double> getCalorias(@PathVariable Pratos prato){
+    public ResponseEntity<Double> getCalorias(@PathVariable String prato){
         Double pratosCalorias =  servicePratos.getCalorias(prato);
         return ResponseEntity.ok(pratosCalorias);
 
     }
 
-    @GetMapping ("/{prato}/maiorCaloria")
-    public ResponseEntity<Optional<Ingredientes>> getMaiorCaloria(@PathVariable String prato){
-        List<Pratos> listaPratos = servicePratos.getPratos();
-//        Optional<Ingredientes> maiorCaloria = servicePratos.getMaiorCaloria(listaPratos.get(prato));
-//        return ResponseEntity.ok(maiorCaloria);
-        return null;
+    @GetMapping ("/maiorCaloria/{prato}")
+    public ResponseEntity<Ingredientes> getMaiorCaloria(@PathVariable String prato){
+        Ingredientes maiorCaloria = servicePratos.getMaiorCaloria(prato);
+
+        return ResponseEntity.ok(maiorCaloria);
+
 
     }
 }

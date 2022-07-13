@@ -25,5 +25,24 @@ public class PratosRepository {
             }
             return listPratos;
         }
+
+
+    public boolean exists(Pratos prato) {
+        boolean existe = false;
+
+        try {
+            existe = (prato.getNome()) != null;
+
+        } catch (Exception e) {
+        }
+
+        return existe;
+    }
+
+
+    public Pratos getPratoByName (){
+
+            return null;
+    }
     }
 

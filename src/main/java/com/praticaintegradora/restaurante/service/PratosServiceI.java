@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface PratosServiceI {
    List<Pratos> getPratos();
-   Double getCalorias(Pratos prato);
+   Double getCalorias(String prato);
 
-   Optional<Ingredientes> getMaiorCaloria();
+   Ingredientes getMaiorCaloria(String prato);
 
 }

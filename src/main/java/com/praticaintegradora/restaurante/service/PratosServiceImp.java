@@ -28,29 +28,48 @@ public class PratosServiceImp implements PratosServiceI{
         return listaPratos;
     }
 
+    public Pratos getPratosByName(String prato) {
+        List<Pratos> listaPratos = pratosRepo.getPratos();
+        Pratos prato1 = null;
+        for (Pratos p : listaPratos) {
+            if (p.getNome().equals(prato)) {
+                prato1 = p;
+                System.out.println(prato1);
+            }
+
+        }
+        return prato1;
+    }
 
     @Override
-    public Double getCalorias(Pratos prato) {
-        List<Pratos> listaPratos = pratosRepo.getPratos();
-        List<Ingredientes> ingredientesList = ingredientesRepo.getIngredientes();
-
-        Pratos prato1 = null;
-//
-//        List<Pratos> listaPrato1 =  listaPratos.stream().filter(p -> p.getNome().equals(prato.getNome())).collect(Collectors.toList());
-            for(Pratos p : listaPratos){
-                if(p.getNome().equals(prato.getNome())){
-                    prato1=p;
-                };
-            }
-            List<Ingredientes> pratoIng = prato1.getIngredientes();
+    public Double getCalorias(String prato) {
+        Pratos prato1 = getPratosByName(prato);
+        List<Ingredientes> pratoIng = prato1.getIngredientes();
             Double somaCalorias = pratoIng.stream().mapToDouble(Ingredientes::getCalories).sum();
 
         return somaCalorias;
     }
 
+
+
     @Override
-    public Optional<Ingredientes> getMaiorCaloria() {
-        return Optional.empty();
+    public Ingredientes getMaiorCaloria(String prato) {
+        Pratos prato1 = getPratosByName(prato);
+        List<Ingredientes> pratoIng = prato1.getIngredientes();
+        Ingredientes ing =null;
+        double valorCalMax =0;
+
+      //  Double.compare(i.getCalories(),valorCalMax)>0
+
+        for(Ingredientes i : pratoIng){
+            if(i.getCalories()>valorCalMax){
+                valorCalMax = i.getCalories();
+                ing =i;
+            }
+        };
+
+      return ing;
+
     }
 
 //    @Override
